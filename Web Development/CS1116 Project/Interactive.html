@@ -1,0 +1,104 @@
+<!-- Do something similar to bmi.py for calculations -->
+<!-- Lecture Eight on databases is very necessary -->
+<!-- Avoid script injections and implement cookies
+ -->
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Old School Vinylz</title>
+
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="HomeWD1_files/styles.css">    
+</head>
+<body>
+<header>
+    <h1>Old School Vinylz</h1>
+    <p>An Online Shop for Vinyl Enthusiasts</p>
+</header>
+<nav>
+    <ul>
+        <li><a href="HomeWD1.html">Home</a></li>
+        <li><a href="Shop.html">Shop</a></li>
+        <li><a href="Interactive.html">Interactive</a></li>
+        <li><a href="Checkout.html">Checkout</a></li>
+        <li><a href="Logout.html">Logout</a></li>
+        <li><a href="News.html">News</a></li>
+    </ul>
+</nav>
+
+<main>
+    <section id="intro">
+    <!-- <h3 id="introHeading">Welcome to Our Online Shop, We Hope You Enjoy your Stay!</h3> -->
+        <!-- <p>Hey Internet stranger, welcome to this corner of the internet - you've come to the right place. Old School Vinylz is a place created just for people like yourself. We are a modern hub for vinyl enthusiasts to purchase their records no matter where they're from. It s a contemporary twist of consumerism on an antiquated technology built on modern technology.</p>
+        <p>This website is aimed at anyone - from the complete beginner to the most advanced enthusiast. We believe that anybody who loves msuci from this medium should be able to jump right in and get started with their own equipment. We ship globally (with fees of course). Take a look around and see what you think, you may be pleasantly surprised at what you might learn.</p> -->
+        <figure id="formImage">
+            <!-- <a href="HomeWD1_files/turntable-1149496_1920.jpg"> --><img  alt="A Modest Viewpoint of the Cosmos" src="HomeWD1_files/turntable-1149496_1920.jpg"><!-- </a> -->
+        </figure>
+        <div id="formContainer">
+        <form id="registerForm" action="register.py" method="post">
+            <fieldset>
+                <legend>Register</legend>
+                <label for="firstname">First Name</label>
+                <input type="text" name="firstname" /> <!-- We also have size maxlength value and disabled attr -->
+                <label for="username">Username</label>
+                <input type="text" name="username" />
+                <label for="password">Password</label>
+                <input type="password" name="password" />
+            </fieldset>
+            <fieldset>
+                <input type="submit" value="Create Account" />
+                <input type="reset"></input>
+            </fieldset>
+        </form>
+        <form id="loginForm" action="login.py" method="post">
+            <fieldset>
+                <legend>Login</legend>
+                <label for="username">Username</label>
+                <input type="text" name="username" />
+                <label for="password">Password</label>
+                <input type="password" name="password" />
+            </fieldset>
+            <fieldset>
+                <input type="submit" value="Login" />
+                <input type="reset"></input>
+            </fieldset>
+        </form>
+        </div>
+    </section>
+    <!-- <div id="fillerDiv"></div> -->
+    <!-- <section id="spaceGallery">
+    <h3 id="homeGalleryHeading">Here's a selection of images that might spark your vinyl obsession! (If you want to see a higher resolution image, simply click)</h3>
+        <figure id="landscapeImage">
+            <a href="images/night-768636_1920.jpg"><img alt="A Modest Viewpoint of the Cosmos" src="./HomeWD1_files/night-768636_1280.jpg"></a>
+            <figcaption>A Modest Viewpoint of the Cosmos</figcaption>
+        </figure>
+        <div class="flexboxContainer">
+        <figure>
+            <a href="images/milky-way-1031138_1920.jpg"><img alt="Our Galaxy" src="./HomeWD1_files/milky-way-1031138_640.jpg"></a>
+            <figcaption>Our Galaxy</figcaption>
+        </figure>
+        <figure>
+            <a href="images/stars-984228_1920.jpg"><img alt="The Aurora Borealis is Captured with Stars Looming Behind It" src="./HomeWD1_files/stars-984228_640.jpg"></a>
+            <figcaption>The Aurora Borealis is Captured with Stars Looming Behind It</figcaption>
+        </figure>
+        </div>
+        <div class="flexboxContainer">
+        <figure>
+            <a href="images/milky-way-1023340_1920.jpg"><img alt="A Fish-Eye Lens Captures a Stargazer" src="./HomeWD1_files/milky-way-1023340_640.jpg"></a>
+        <figcaption>A Fish-Eye Lens Captures a Stargazer</figcaption>
+        </figure>
+        <figure>
+            <a href="images/milky-way-984286_1920.jpg"><img alt="Our Milkyway in Bright Conditions" src="./HomeWD1_files/milky-way-984286_640.jpg"></a>
+        <figcaption>Our Milkyway in Bright Conditions</figcaption>
+        </figure>
+        </div>
+    </section> -->
+</main>
+<footer>
+    <small id="footerInfo">All images used throughout the development of this website are licensed under the creative commons license - downloaded from https://pixabay.com. Website was developed for submission to CS1116 Web Devlopment II Module under the administration of Derek Bridge. Website developed by Tim Lehane</small>
+</footer>
+</body></html>

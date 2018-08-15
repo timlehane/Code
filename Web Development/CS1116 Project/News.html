@@ -1,0 +1,70 @@
+<!-- Do something similar to bmi.py for calculations -->
+<!-- Lecture Eight on databases is very necessary -->
+<!-- Avoid script injections and implement cookies
+ -->
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Old School Vinylz</title>
+
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="HomeWD1_files/styles.css">    
+</head>
+<body>
+<header>
+    <h1>Old School Vinylz</h1>
+    <p>An Online Shop for Vinyl Enthusiasts</p>
+</header>
+<nav>
+    <ul>
+        <li><a href="HomeWD1.html">Home</a></li>
+        <li><a href="Shop.html">Shop</a></li>
+        <li><a href="Interactive.html">Interactive</a></li>
+        <li><a href="Checkout.html">Checkout</a></li>
+        <li><a href="Logout.html">Logout</a></li>
+        <li><a href="News.html">News</a></li>
+    </ul>
+</nav>
+<main>
+    <section id="posts">
+    <div class="wrapper">
+    <article>
+        <img src="HomeWD1_files/daft-punk-box-set-5.jpg">
+        <div>
+          <h3><b>Daft Punk Release Deluxe RAM Box Set in LA Pop Up Shop</b></h3>
+        </div>
+        <div>
+            <p>After spending years under the radar, the "Get Lucky" duo have finally surfaced. 'Thomas Bangalter' and 'Guy-Manuel de Homem-Christo' have opened a pop up shop in downtown LA which features a host of goodies that Daft Punk enthusiasts can enjoy</p>
+            <p>As well as featuring a retrospective of archival set pieces, props, robot helmets, artwork, photography and wardrobe, the shop will also have a selection of limited edition Daft Punk garments and accessories created by influential boundary pushing designers such as Gosha Rubchinskiy, Off-White, Enfants Riches Deprimes, Darkdrom, Hervet Manufacturier and Han Cholo. They're also releasing a special edition of their Random Access Memories Vinyl in the form of a deluxe box set</p>
+            <p>The box set will feature a series of transparent slides that, when combined together, make up the anatomy of the robots. In addition to this it will feature two USBs containing the master tracks of the iconic tracklist of RAM as well as a book publisising exclusive images of some of the moments which led to the creation of this album.</p>
+            <p>All in all, while the price is expensive (it will set you back approximately €250), we would recommmend this set if you're a Daft Punk fan. Let us know what you think in the comments. NOTE: You will need an account to post comments - simply register/login at the home page!</p>
+        </div>
+    </article>
+    </div>
+    </section>
+    <div class="wrapper">
+    <section id="comments">
+        <form action="News.py" method="post">
+            <fieldset>
+                <legend>Post a new comment</legend>
+                <label for="username">Name:</label>
+                <input type="text" name="username" id="username" />
+                <label for="new_comment">Comment:</label>
+                <textarea name="new_comment" id="new_comment" rows="5" cols="50">
+                </textarea>
+                <input type="submit" />
+            </fieldset>
+        </form>
+    </section>
+    </div>
+
+
+</main>
+<footer>
+    <small id="footerInfo">All images used throughout the development of this website are licensed under the creative commons license - downloaded from https://pixabay.com. Website was developed for submission to CS1116 Web Devlopment II Module under the administration of Derek Bridge. Website developed by Tim Lehane</small>
+</footer>
+</body></html>

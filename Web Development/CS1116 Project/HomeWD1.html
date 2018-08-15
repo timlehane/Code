@@ -1,0 +1,77 @@
+<!-- Do something similar to bmi.py for calculations -->
+<!-- Lecture Eight on databases is very necessary -->
+<!-- Avoid script injections and implement cookies
+ -->
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Old School Vinylz</title>
+
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="HomeWD1_files/styles.css">    
+</head>
+<body>
+<header>
+    <h1>Old School Vinylz</h1>
+    <p>An Online Shop for Vinyl Enthusiasts</p>
+</header>
+<nav>
+    <ul>
+        <li><a href="HomeWD1.html">Home</a></li>
+        <li><a href="Shop.html">Shop</a></li>
+        <li><a href="Interactive.html">Interactive</a></li>
+        <li><a href="Checkout.html">Checkout</a></li>
+        <li><a href="Logout.html">Logout</a></li>
+        <li><a href="News.html">News</a></li>
+    </ul>
+</nav>
+<main>
+    <section id="intro">
+
+        <img id="formImage" src="HomeWD1_files/turntable-1149496_1920.jpg" />
+        <div id="formContainer">
+        <form id="registerForm" action="register.py" method="post">
+            <fieldset class="centre">
+                <legend>Register</legend>
+                <label for="username">Username</label>
+                <input type="text" name="username" />
+                <span id="checker"></span>              
+                <label for="email1">Email</label>
+                <input type="email1" name="email1" />
+                <label for="email2">Confirm email</label>
+                <input type="email2" name="email2" />
+                <label for="password1">Password</label>
+                <input type="password1" name="password1" />
+                <label for="password2">Confirm Password</label>
+                <input type="password2" name="password2" />
+            </fieldset>
+            <fieldset class="centre">
+                <input type="submit" value="Create Account" />
+                <input type="reset"></input>
+            </fieldset>
+        </form>
+        <form id="loginForm" action="login.py" method="post">
+            <fieldset class="centre">
+                <legend>Login</legend>
+                <label for="username">Username</label>
+                <input type="text" name="username" />
+                <label for="password">Password</label>
+                <input type="password" name="password" />
+            </fieldset class="centre">
+            <fieldset>
+                <input type="submit" value="Login" />
+                <input type="reset"></input>
+            </fieldset>
+        </form>
+        </div>
+    </section>
+
+</main>
+<footer>
+    <small id="footerInfo">All images used throughout the development of this website are licensed under the creative commons license - downloaded from https://pixabay.com. Website was developed for submission to CS1116 Web Devlopment II Module under the administration of Derek Bridge. Website developed by Tim Lehane</small>
+</footer>
+</body></html>
