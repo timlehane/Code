@@ -1,0 +1,115 @@
+from tkinter import *
+import shelve
+
+class Point(object):
+    def __init__(self, x, y):
+        self._x = x
+        self._y = y
+
+    def getX(self):
+        return self._x
+
+    def getY(self):
+        return self._y
+
+    def setX(self, x):
+        self._x = x
+
+    def setY(self, y):
+        self._y = y
+
+    def __str__(self):
+        return "%d %d" % (self._x, self._y)
+
+class Line(object):
+    def __init__(self, ep1, ep2):
+        self._ep1 = ep1
+        self._ep2 = ep2
+
+    def getEp1(self):
+        return self._ep1
+
+    def getEp2(self):
+        return self._ep2
+
+    def setEp1(self, ep1):
+        self._ep1 = ep1
+
+    def setEp2(self, ep2):
+        self._ep2 = ep2
+
+    def __str__(self):
+        return "%d %d %d %d" % (self._ep1._x, self._ep1._y, self._ep2._x, self._ep2._y)
+
+class View(object):
+
+    def __init__(self):
+
+        self._lineCollection = []
+        self._isfirstclick = True
+        self._point1 = None
+        self._point2 = None
+
+        self._root = Tk()
+
+        self._menubar = Menu(self._root)
+        self._filemenu = Menu(self._menubar)
+        self._filemenu.add_command(label="Save", command=self.savelines)
+        self._filemenu.add_command(label="Load", command=self.loadlines)
+        self._filemenu.add_separator()
+        self._filemenu.add_command(label="Exit", command=self._root.quit)
+        self._menubar.add_cascade(label="File", menu=self._filemenu)
+        self._root.config(menu=self._menubar)
+
+        self._drawingspace = Canvas(self._root, bg="black", height=300, width=300)
+        self._drawingspace.pack()
+
+        self._drawingspace.bind("<Button-1>", self.mouseclicked)
+
+        button = Button(self._root, text="Start Again", command=self.clearall)
+        button.pack(side=BOTTOM)
+
+        self._root.mainloop()
+
+    def savelines(self):
+        s = shelve.open('lines_shelve.db')
+        try:
+            s['lines'] = self._lineCollection
+        finally:
+            s.close()
+
+    def loadlines(self):
+        s = shelve.open('lines_shelve.db')
+        try:
+            self._lineCollection = s['lines']
+        finally:
+            s.close()
+        self.redraw()
+
+    def redraw(self):
+        self._drawingspace.delete(ALL)
+        for line in self._lineCollection:
+            start = line.getEp1()
+            end = line.getEp2()
+            self._drawingspace.create_line(start.getX(), start.getY(), end.getX(), end.getY(), fill="red")
+
+    def clearall(self):
+        self._lineCollection = []
+        self.redraw()
+
+    def mouseclicked(self, event):
+        if self._isfirstclick:
+            self._point1 = Point(event.x, event.y)
+            self._isfirstclick = False
+        else:
+            self._point2 = Point(event.x, event.y)
+            line = Line(self._point1, self._point2)
+            self._lineCollection.append(line)
+            self.redraw()
+            self._isfirstclick = True
+
+def main():
+    app = View()
+
+if __name__ == "__main__":
+    main()
