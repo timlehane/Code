@@ -1,0 +1,66 @@
+; Enter two single digit operands at the kbd, display each in turn on the 7-segment display then display the result of adding 
+; both operands on the 7-segment display. It is assumed that the result will not exceed the value 9, otherwise the result is undefined.
+
+;
+; A table of data, holding the hex values needed to display the symbols 0..9
+; is stored in memory starting at address 80
+;
+;
+; The al register is used hold the values coming from the kbd and also being output to Port 02
+; The bl register is used to hold the start address of the data table.
+
+; start of code clear both the right hand side and left hand side of the 7-seg display
+   mov al, 00
+   out 02
+   mov al, 01
+   out 02
+; end of code to clear both the right hand side and left hand side of the 7-seg display
+
+mov bl, 80    ; Put the start address of the table into the bl register: 80 is the start address of the translation table.
+
+start:
+ in 00         ; Read first operand from the kbd
+ sub al, 30    ; convert to integer
+ push al       ; place the first operand on the stack, since al will be reused
+ add al, bl    ; add the start address of the data table, this will give the address of the value needed to display the symbol corresponding 
+               ; inputted numeric character.
+ mov al, [al]  ; Fetch the value from that address into the al register
+ out 02        ; Send to the 7-seg display
+
+ in 00         ; Read second operand from the kbd
+ sub al, 30    ; convert to integer
+ push al       ; place the second operand on the stack, since al will be reused
+ add al, bl    ; add the start address of the data table, this will give the address of the value needed to display the symbol corresponding 
+               ; inputted numeric character.
+ mov al, [al]  ; Fetch the value from that address into the al register
+ out 02        ; Send to the 7-seg display
+
+; retrieve the operands from the stack, add them together and display on the 7-seg display
+
+ pop cl        ; place operand 2 into the cl register
+ pop dl        ; place operand 1 into the dl register
+ add cl, dl    ; add and place result into cl
+ push cl       ; copy the result value in cl to al ...
+ pop al        ; via the stack
+ add al, bl    ; add the start address of the data table, this will give the address of the value needed to display the symbol corresponding 
+               ; result value 
+ mov al, [al]  ; Fetch the value from that address into the al register
+ out 02        ; Send to the 7-seg display
+
+
+jmp start
+
+
+; start the data table from address 80
+org 80
+DB fb ; Hex value needed to display 0 in 7-seg display
+DB 0b ; Hex value needed to display 1 in 7-seg display
+DB b7 ; Hex value needed to display 2 in 7-seg display
+DB 9f ; Hex value needed to display 3 in 7-seg display
+DB 4f ; Hex value needed to display 4 in 7-seg display
+DB dd ; Hex value needed to display 5 in 7-seg display
+DB 7d ; Hex value needed to display 6 in 7-seg display
+DB 8b ; Hex value needed to display 7 in 7-seg display
+DB ff ; Hex value needed to display 8 in 7-seg display
+DB cf ; Hex value needed to display 9 in 7-seg display
+end

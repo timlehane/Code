@@ -1,0 +1,76 @@
+; write all the digits from 00 to 99, in turn, on to the seven segment display, Port 02. 
+; 
+
+; start of code to clear both the right hand side and left hand side of the 7-seg display
+   mov al, 00
+   out 02
+   mov al, 01
+   out 02
+; end of code to clear both the right hand side and left hand side of the 7-seg display
+
+mov bl, 50   ; Bl holds the base address of the translation table for the 7 segment display
+mov cl, 00   ; use cl to hold the units
+mov dl, 00   ; use dl to hold the tens
+;
+; Set the diaplay to read 00
+mov al, [bl] ; Set the right hand side display to 0
+out 02
+sub al, 01   ; Set the left hand side display to 0
+out 02
+
+start:       ; Continually display and increment the units
+ call 60     ;
+ jmp start   ; 
+
+org 60       ; Subroutine to display and increment the units.
+             ; If the units exceed 9, increment and disply the tens 
+push cl      ; move the value in the cl register(containing the number of units) into the al register
+pop al       ; 
+add al, bl   ; Add the base address of the translations table to get the address of the appropriate display code
+mov al, [al] ; Move the display code into the al register 
+out 02       ; send this code to the 7 segment disply
+inc cl       ; increment the number of units
+cmp cl, 0a   ; check to see if the number of units = 10
+jnz done60   ; if not, end the subroutine by jumping to the ret instruction
+mov cl, 00   ; if so, reset the number of units to 0
+mov al, [bl] ; and reset the units display to 0
+out 02
+call 80      ; call subroutine to process increment to the 10s 
+done60:
+ret
+
+org 80       ; Subroutine to display and increment the tens
+             ; If the tens exceed 9, reset them back to 0
+inc dl       ; increment the number of 10s
+cmp dl, 0a   ; check to see if the number of tens = 10
+jz reset10s  ; if so, reset the 10s register and the 10s display
+
+push dl      ; move the value in the dl register(containing the number of tens) into the al register
+pop al
+add al, bl   ; Add the base address of the translations table to get the address of the appropriate display code
+mov al, [al] ; Move the display code into the al register
+sub al, 01   ; subtract 01 from this code to get the appropriate display code for the right hand display
+out 02
+jmp done80   ; end the subroutine by juming to the ret instruction
+
+reset10s:
+mov dl, 00   ; Reset the number of tens to 0
+mov al, [bl] ; Reset the right hand display to 0
+sub al, 01
+out 02
+done80:
+ret
+
+; start the data table from address 50
+org 50
+DB fb ; Hex value needed to display 0 in 7-seg display
+DB 0b ; Hex value needed to display 1 in 7-seg display
+DB b7 ; Hex value needed to display 2 in 7-seg display
+DB 9f ; Hex value needed to display 3 in 7-seg display
+DB 4f ; Hex value needed to display 4 in 7-seg display
+DB dd ; Hex value needed to display 5 in 7-seg display
+DB 7d ; Hex value needed to display 6 in 7-seg display
+DB 8b ; Hex value needed to display 7 in 7-seg display
+DB ff ; Hex value needed to display 8 in 7-seg display
+DB cf ; Hex value needed to display 9 in 7-seg display
+end

@@ -1,0 +1,24 @@
+; Convert the value of a numeric character:
+; '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+; to its numeric equivalent. That is, '0' -> 0; '1' -> 1, etc
+
+; The process involves subtracting the ascii value for '0' (i,e., 30Hex)
+; from the ascii value of the numeric character entered.
+; This gives us the desired result because the numberic characters are contiguous in the ascii table
+; starting at position 30.
+
+; It is assumed that only the numeric characters are pressed. If another character is pressed,
+; the result will not be meaningful. For example 'a' will be converted to '1', '{' will be converted to 'c', etc,
+; since these are the values that one gets from simply subtracting 30 from the ascii values of these characters.
+
+begin:
+in 00 ; read a character from the kbd and place into al
+
+sub al, 30 ; al now holds the numeric value
+
+mov [c0], al ; Note that the VDU is now trying to display the characters in the ascii table
+	     ; at position 0 to 9. These are typically unprintable.
+             ; To display the desired character, the value 30 should be added to the numeric value
+             ; before placing it into the VDU RAM.
+jmp begin
+end

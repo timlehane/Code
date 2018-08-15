@@ -1,0 +1,26 @@
+; Display output on the 7-segment display
+; The 7-Segment Display is attached to Port 02 of Samphire
+
+begin:
+mov al, fb ; Pattern for 0
+out 02
+mov al, 0b ; Pattern for 1
+out 02
+mov al, b7 ; Pattern for 2
+out 02
+mov al, 9f ; Pattern for 3
+out 02
+mov al, 4f ; Pattern for 4
+out 02
+mov al, dd ; Pattern for 5
+out 02
+mov al, 7d ; Pattern for 6
+out 02
+mov al, 8b ; Pattern for 7
+out 02
+mov al, ff ; Pattern for 8
+out 02
+mov al, cf ; Pattern for 9
+out 02
+jmp begin
+end

@@ -1,0 +1,40 @@
+; Constructing  multidigit number.
+; Here it is assumed that the user will input 2 numeric characters and that these should be converted 
+; into a 2 digit number. Thus, for example, '2' (i.e., 32hex) followed by '3' (i.e., 33hex) should be converted into 23.
+;
+; To read a multidigit number, the process is a follows:
+; the first numeric character represent the 10s portion of the number to be constructed. Thus, the numberic character is first coverted into 
+; its numeric equivalent and then multiplied by 10 (i.e., 0a hex).
+;
+; This value is placed on the stack to free up the al register to accept the next character from the keyboard. This represents
+; the units portion of the number to be constructed. It is converted into its numeric equivalent and then added to the 10s portion, 
+; which is still on the top of the stack.
+
+; Writing out a multidigit number follows a similar process:
+; By getting the number modulus 10 (i.e., 0a hex) the units portion of the number can be determined. This can be written to the 
+; appropriate place in the VDU after adding 30hex to determine its corresponding character value.
+; By dividing the number by 10 (i.e., 0a hex) the 10s portion of the number can be determined. This can be written to the 
+; appropriate place in the VDU after adding 30hex to determine its corresponding character value.
+
+Read:
+in 00      ; read first character from the kbd
+sub al, 30 ; convert to numeric value
+mul al, 0a ; multiply by 10
+push al    ; place on stack to free al register 
+
+in 00      ; read second character from the kbd
+sub al,30  ; convert to numeric value
+pop bl     ; retrieve the 10s portion of the number from the stack
+add al, bl ; construct the final number.
+
+Write:
+push al    ; place the number on the stack for save keeping since the al value will change
+mod al, 0a ; determine the units portion of the number 
+add al, 30 ; convert to numeric character
+mov [c1], al; place in appropriate place in VDU
+
+pop al      ; retrieve original number from stack
+div al, 0a  ; determine the 10s portion of the number
+add al, 30   ; convert ot numeric character11
+mov [c0], al ; place in appropriate place on the stack
+end

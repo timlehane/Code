@@ -1,0 +1,11 @@
+; Examining the process of reading input from the keyboard
+; and writing it to the VDU
+
+begin:
+in 00        ; Port 00 corresponds to the keyboard
+             ; The value coming from the kbd is placed into the al register. This is
+	     ; always an ascii value
+mov [c0], al ; The ascii value of the key pressed is placed into the VDU and the VDU
+	     ; refers to ASCII table to render the associated symbol on the screen
+jmp begin
+end

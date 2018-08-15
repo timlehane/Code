@@ -1,0 +1,58 @@
+
+; Control the traffic lights peripheral sitting on Port 01. 
+; It uses a subroutine to implement a delay loop so that
+; the green, yellow, red time of each light can be varied. 
+
+; The registers are used as follows:
+; al is used to hold the value to be sent out through Port 01. 
+; bl is used in the subroutine to hold the loop iteration count
+; cl is used to hold the size of the delay loop. This is effectively a
+; parameter to the delay loop. This "parameter" can be used accessed directly 
+; from the subroutine. However, to allow the cl register to be reused in the subroutine
+; or to enable the passing of more parameters than there are registers, each parameter 
+; can be pushed onto the stack on the calling side and popped from the stack on the called side.
+; dl is used in the subroutine to hold the size of the delay.
+
+; This program also introduces the call, ret, cmp and jnz instructions
+
+begin:
+mov al, 84 ; Ryg-ryG
+out 01
+mov cl, 10 ; set up a parameter count of 10 
+push cl    ; for the subroutine call and push it onto the stack
+call 50    ; call the delay subroutine
+
+mov al, 48 ; rYg-rYg
+out 01
+mov cl, 5  ; set up a parameter count of 5
+push cl    ; for the subroutine call and push it onto the stack
+call 50    ; call the delay subroutine
+
+mov al, 30 ; ryG-Ryg
+out 01
+mov cl, 20 ; set up a parameter count of 20
+push cl    ; for the subroutine call and push it onto the stack
+call 50    ; call the delay subroutine
+
+mov al, 48 ; rYg-rYg
+out 01
+mov cl, 5  ; set up a parameter count of 5
+push cl    ; for the subroutine call and push it onto the stack
+call 50    ; call the delay subroutine
+jmp begin  ; unconditional jump back to begin
+
+
+org 50     ; The Delay Subroutine
+mov bl, 00 ; bl starts at 00 and is incremented until it reaches the value of dl
+pop cl     ; The top of the stack will be the return address, since the call is made after the parameter is pushed.
+           ; The return address is popped into cl for safekeeping. The top of the stact will then contain the parameter.
+pop dl     ; The delay parameter is popped into dl
+push cl    ; The return address is then placed back onto the stack so that it can be used by the ret instruction.
+count:     ; This is the delay loop proper.
+add bl, 1  ; increment bl
+cmp bl, dl ; compare bl to dl
+jnz count  ; if they are not equal, the loop should continue. If they are equal, 
+ret        ; the subroutine returns
+
+
+end
